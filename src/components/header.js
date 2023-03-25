@@ -19,9 +19,9 @@ export default function Header () {
       <div className="flex items-center flex-shrink-0 text-white mr-6">
         <span className="font-semibold text-xl tracking-tight"><Link href='/'>Neuroar</Link></span>
       </div>
-      <div className="flex items-center flex-shrink-0 text-white mr-6">
+      {session && <div className="flex items-center flex-shrink-0 text-white mr-6">
         <span className="font-semibold text-xl tracking-tight"><Link href='/dashboard'>Dashboard</Link></span>
-      </div>
+      </div>}
       {/* div to disply name of user from session.user.title */}
         <div className="flex items-center flex-shrink-0 text-white mr-6">
         <span className="font-semibold text-xl tracking-tight">{session && session.user.name}</span>
