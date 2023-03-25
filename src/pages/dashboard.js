@@ -55,13 +55,14 @@ export default function Home(data) {
       >
         <Header />
         {/* <TaskList tasks={data.data.daily_tasks} /> */}
+        <div className='flex gap-4 mx-auto py-8  px-8'>
         <Link  href={{
     pathname: '/scedhule',
     query: {sampleData}
   }}>
         
         <div
-          className=' rounded-full  w-40 h-40   border-gray-200'
+          className=' rounded-full mx-10 w-40 h-40   border-gray-200'
           style={{
             
             background: "background: rgba( 255, 255, 255, 0.25 )",
@@ -78,6 +79,49 @@ export default function Home(data) {
 
       
     </Link>
+    <Link  href='/bionic'>
+        
+        <div
+          className=' rounded-full  mx-10 w-40 h-40   border-gray-200'
+          style={{
+            
+            background: "background: rgba( 255, 255, 255, 0.25 )",
+            backdropFilter: "blur( 4px )",
+            boxShadow:  "23px 23px 45px #160016, -23px -23px 45px #5a0056"
+            
+          }}
+        >
+          <div className='flex flex-col items-center text-center font-mono justify-center h-full'>
+            <h1 className='text-2xl font-bold text-white'>Bionic Reading</h1>
+            </div>
+          
+        </div>
+
+      
+    </Link>
+    <Link  href='/mood'>
+        
+        <div
+          className=' rounded-full  mx-10 w-40 h-40   border-gray-200'
+          style={{
+            
+            background: "background: rgba( 255, 255, 255, 0.25 )",
+            backdropFilter: "blur( 4px )",
+            boxShadow:  "23px 23px 45px #160016, -23px -23px 45px #5a0056"
+            
+          }}
+        >
+          <div className='flex flex-col items-center text-center font-mono justify-center h-full'>
+            <h1 className='text-2xl font-bold text-white'>Mood Quiz</h1>
+            </div>
+          
+        </div>
+
+      
+    </Link>
+    
+        </div>
+        
           <Timer seconds="100"  />
         
 
