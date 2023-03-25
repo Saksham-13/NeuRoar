@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import TaskList from '@/components/tasklist'
 import Scedhule from './scedhule'
 import { useRouter } from 'next/router'
+import Timer from '../components/timer'
 export async function getServerSideProps() {
   const res = await fetch('https://Hashcode.sakshamalok.repl.co/user', {
         method: 'POST',
@@ -40,27 +41,44 @@ export default function Home(data) {
   console.log("data is",data.data.username)
 
   return (
-    <div >
-      <Head>
-        <title>Nextjs | Next-Auth</title>
-
-      </Head>
-      <Header />
-      <main >
-        
-        <TaskList tasks={data.data.daily_tasks} />
+    <div  style={{
+      backgroundColor : "#0cbaba",
+  backgroundImage: "linear-gradient(315deg, #0cbaba 0%, #380036 74%)"
+  
+      }}
+      className="h-screen"
+      >
+     
+      
+      <main
+      
+      >
+        <Header />
+        {/* <TaskList tasks={data.data.daily_tasks} /> */}
         <Link  href={{
     pathname: '/scedhule',
     query: {sampleData}
   }}>
         
         <div
-          className='bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 border border-gray-200'
+          className=' rounded-full  w-40 h-40   border-gray-200'
+          style={{
+            
+            background: "background: rgba( 255, 255, 255, 0.25 )",
+            backdropFilter: "blur( 4px )",
+            boxShadow:  "23px 23px 45px #160016, -23px -23px 45px #5a0056"
+            
+          }}
         >
-          Scedhule
+          <div className='flex flex-col items-center font-mono justify-center h-full'>
+            <h1 className='text-2xl font-bold text-white'>Schedule</h1>
+            </div>
+          
         </div>
+
       
     </Link>
+          <Timer seconds="100" />
         
 
       </main>

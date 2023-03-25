@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Header from '@/components/Header'
+// import StarsCanvas from '@/components/stars'
 export default function Home() {
   return (
     <>
@@ -15,6 +16,8 @@ export default function Home() {
       </Head>
       <Header />
       <main >
+        {/* <StarsCanvas /> */}
+
         <div >
           <h1 className="text-4xl text-red-500  font-bold">Welcome to Neuroar</h1>
         </div>
