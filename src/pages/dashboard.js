@@ -78,7 +78,7 @@ export default function Home(data) {
 
       
     </Link>
-          <Timer seconds="100" />
+          <Timer seconds="100"  />
         
 
       </main>
