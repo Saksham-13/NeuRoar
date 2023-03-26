@@ -1,7 +1,8 @@
+'use client'
 import React, { useState } from "react";
 import { useRouter } from 'next/router'
 
-
+import { useEffect } from "react";
 
 const Scedhule = ({  }) => {
 const initialData=[
@@ -13,7 +14,7 @@ const initialData=[
   const [data, setData] = useState(initialData);
   const [title, setTitle] = useState("");
   const [time, setTime] = useState("");
-
+  
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
   };
@@ -25,18 +26,42 @@ const initialData=[
     const newData = [...data]; 
     newData.splice(index, 1);
     setData(newData);
+    localStorage.setItem("scheduleData", JSON.stringify(newData));
+    // console.log(localStorage.getItem("scheduleData"));
   };
   const handleAddItem = () => {
     if (title && time) {
       const newItem = { title, time };
-      setData([...data, newItem]);
+      const newData = [...data, newItem];
+      setData(newData);
       setTitle("");
       setTime("");
+      console.log(data);
+      localStorage.setItem("scheduleData", JSON.stringify(newData));
+      // console.log(localStorage.getItem("scheduleData"));
     }
   };
+  
 
-  const sortedData = data.sort((a, b) => new Date(a.time) - new Date(b.time));
-
+  
+  useEffect(() => {
+    const storedData = localStorage.getItem("scheduleData");
+    console.log("str",storedData);
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      setData(parsedData);
+      console.log(parsedData);
+      console.log("if")
+    }
+    else {
+      setData(initialData);
+      console.log("else")
+    }
+    const sortedData = data.sort((a, b) => new Date(a.time) - new Date(b.time));
+    setData(sortedData);
+  }, []);
+  
+// console.log(data)
   return (
     <div className="flex  justify-center" style={{
     backgroundColor : "#0cbaba",
@@ -77,7 +102,7 @@ backgroundImage: "linear-gradient(315deg, #0cbaba 0%, #380036 74%)"
           </div>
         </div>
         <div className="w-1/3 mx-auto">
-        {sortedData.map((item, index) => (
+        {data.map((item, index) => (
           <><div key={index} className="my-4 p-4 bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 shadow-md rounded-md flex justify-between">
                 <div>
                 <h2 className="text-lg text-white font-medium">{item.title}</h2>

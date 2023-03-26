@@ -69,24 +69,25 @@ function MoodQuiz() {
   }
 
   return (
-    <><Header /><div className=" h-screen mx-auto text-white flex flex-col px-4"
+    <><Header /><div className=" h-screen mx-auto text-white text-center gap-4 flex flex-col px-4"
     style={{
         backgroundColor : "#0cbaba",
     backgroundImage: "linear-gradient(315deg, #0cbaba 0%, #380036 74%)"
     
         }}
-    >
-          <h1 className="text-3xl font-bold mb-4">Mood Quiz</h1>
+    >       
+    <div className='flex flex-col gap-8 my-36'>
+    <h1 className="text-3xl font-bold mb-4">Mood Quiz</h1>
           {questions.map((question, index) => (
               <div
                   key={index}
                   className={`mb-4 ${index === currentQuestion ? 'block' : 'hidden'}`}
               >
-                  <h2 className="text-xl font-medium mb-2">{question.text}</h2>
+                  <h2 className="text-xl my-10 font-medium mb-2">{question.text}</h2>
                   {question.options.map((option, index) => (
                       <button
                           key={index}
-                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-2 ml-5"
+                          className="bg-blue-500 my-6 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  ml-5"
                           onClick={() => handleOptionSelect(option)}
                       >
                           {option.text}
@@ -94,6 +95,8 @@ function MoodQuiz() {
                   ))}
               </div>
           ))}
+    </div>
+          
 
       </div></>
   );

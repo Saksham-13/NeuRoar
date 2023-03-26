@@ -29,11 +29,11 @@ const BionicReading = () => {
       }
 
       if (boldCount >= length) {
-        return <span key={index} className=" text-center font-bold">{word}</span>;
+        return <span key={index} className=" text-center text-white font-bold">{word}</span>;
       } else {
         return (
-          <span key={index} className="w-2/3  text-center text-xl">
-            <span className="font-bold">{word.slice(0, boldCount)}</span>
+          <span key={index} className="w-2/3  text-gray-400 text-center text-xl">
+            <span className=" text-white font-bold">{word.slice(0, boldCount)}</span>
             {word.slice(boldCount)}
             {index !== words.length - 1 && <>&nbsp;</>}
           </span>
@@ -66,12 +66,12 @@ const BionicReading = () => {
 
         <button
           onClick={handleConvertClick}
-          className="bg-blue-500 hover:bg-blue-600 w-24 mx-auto text-white py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="bg-blue-500 hover:bg-blue-600 w-24 mx-auto py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           Convert
         </button>
-        <div className='mx-auto text-white'>
-        {formattedWords}
+        <div className='mx-auto text-xxxl w-1/2  rounded-lg p-6 whitespace-normal bg-black '>
+        <p className='break-words'>{formattedWords}</p>
         </div>
         
       </div>

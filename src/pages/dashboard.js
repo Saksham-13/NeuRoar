@@ -9,6 +9,7 @@ import TaskList from '@/components/tasklist'
 import Scedhule from './scedhule'
 import { useRouter } from 'next/router'
 import Timer from '../components/timer'
+import TodoList from '@/components/todoist'
 export async function getServerSideProps() {
   const res = await fetch('https://Hashcode.sakshamalok.repl.co/user', {
         method: 'POST',
@@ -46,7 +47,7 @@ export default function Home(data) {
   backgroundImage: "linear-gradient(315deg, #0cbaba 0%, #380036 74%)"
   
       }}
-      className="h-screen"
+      className="h-screen items-center"
       >
      
       
@@ -121,10 +122,17 @@ export default function Home(data) {
     </Link>
     
         </div>
-        
-          <Timer seconds="100"  />
-        
+        <div className='item-center flex'>
+        <Timer seconds="100"  />
+        </div>
+         <div 
+         className='grid grid-cols-2 gap-4 mx-auto py-8  px-8'
+         >
+          
+         <TodoList todos={data.data.todo_list}/>
 
+         </div>
+        
       </main>
     </div>
   )

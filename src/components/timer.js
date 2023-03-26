@@ -25,7 +25,10 @@ function Timer({ seconds }) {
     setCol("#06D6A0")
     setIsPaused(false);
   };
-
+  const handleRestart = () => {
+    handlePause()
+    setremsec(seconds);
+  };
   const hours = Math.floor(remsec / 3600);
   const minutes = Math.floor((remsec % 3600) / 60);
   const secondsLeft = remsec % 60;
@@ -40,7 +43,7 @@ function Timer({ seconds }) {
 
   return (
     <div
-      className="justify-center items-center grid"
+      className="justify-center items-center mx-auto grid"
       style={{ position: "relative", width: "200px", height: "200px" }}
     >
       <CircularProgress
@@ -65,7 +68,7 @@ function Timer({ seconds }) {
       ) : (
         <button onClick={handlePause}> {timeString}</button>
       )}
-       
+       <button onClick={handleRestart}>Restart</button>
       </div>
       
     </div>
