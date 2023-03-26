@@ -10,8 +10,10 @@ import Scedhule from './scedhule'
 import { useRouter } from 'next/router'
 import Timer from '../components/timer'
 import TodoList from '@/components/todoist'
+import axios from 'axios'
+import Profile from '@/prog'
 export async function getServerSideProps() {
-  const res = await fetch('https://Hashcode.sakshamalok.repl.co/user', {
+  const res = await fetch('https://CoordinatedWarmBloatware.ebook1.repl.co/user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -28,10 +30,23 @@ export async function getServerSideProps() {
   }
 }
 export default function Home(data) {
+  const handlepoints = (points) => {
+    console.log(points)
+    setExp(points/100 +1)
+    console.log(exp)
+    axios.post('https://CoordinatedWarmBloatware.ebook1.repl.co/change', { value: points, email:"bob.johnson@example.com", var:"experience_level"})
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
+    setPoints(points);
+  };
   
   const { data: session, status } = useSession()
   const loading = status === "loading"
   const [data1, setData1] = useState(data);
+  const [points,setPoints] = useState(data.data.user_profile.experience_level);
+  const [exp,setExp]= useState(data.data.user_profile.experience_level/100 +1);
+  console.log("point",points)
+  console.log("exp",exp)
  const sampleData = [
     { title: "Meeting with clients", time: "2023-03-25T10:30:00" },
     { title: "Lunch break", time: "2023-03-25T12:00:00" },
@@ -39,7 +54,7 @@ export default function Home(data) {
     { title: "Finish project proposal", time: "2023-03-25T16:00:00" },
   ];
   
-  console.log("data is",data.data.username)
+  console.log("data is",data.data.user_profile.experience_level)
 
   return (
     <div  style={{
@@ -47,7 +62,7 @@ export default function Home(data) {
   backgroundImage: "linear-gradient(315deg, #0cbaba 0%, #380036 74%)"
   
       }}
-      className="h-screen items-center"
+      className="h-full items-center"
       >
      
       
@@ -55,9 +70,27 @@ export default function Home(data) {
       
       >
         <Header />
+        {/* div for display point alognsde profile component */}
+        <div className='flex gap-4 mx-auto py-8  px-8'>
+
+        <Profile points={points} expp={exp} />
+        <div 
+         className='text-white text-4xl font-bold'
+         >
+         {points}
+          </div> 
+        </div>
         {/* <TaskList tasks={data.data.daily_tasks} /> */}
         <div className='flex gap-4 mx-auto py-8  px-8'>
-        <Link  href={{
+         {/* <div 
+         className='text-white text-4xl font-bold'
+         >
+         {points}
+          </div>  */}
+          <div
+          className='flex gap-6 mx-auto  my-3 items-center justify-between'
+          > 
+          <Link  href={{
     pathname: '/scedhule',
     query: {sampleData}
   }}>
@@ -121,15 +154,28 @@ export default function Home(data) {
       
     </Link>
     
+          </div>
+        
         </div>
         <div className='item-center flex'>
         <Timer seconds="100"  />
         </div>
          <div 
-         className='grid grid-cols-2 gap-4 mx-auto py-8  px-8'
+         className='grid my-10 grid-cols-2 gap-4 mx-auto py-8 text-center font-mono px-8'
          >
+          <div
           
-         <TodoList todos={data.data.todo_list}/>
+          >
+
+          <h2 className='text-2xl my-4 font-bold text-white'>Todo List</h2>
+          <TodoList todo={data.data.todo_list} handlepoints={handlepoints} points={points}/>
+
+          </div>
+          <div>
+          <h2 className='text-2xl font-bold my-4  text-white'>Daily Tasks</h2>
+          <TodoList todo={data.data.daily_tasks} handlepoints={handlepoints} points={points}/>
+
+          </div>
 
          </div>
         

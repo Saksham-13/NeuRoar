@@ -20,9 +20,11 @@
     "react": "18.2.0",
     "react-circular-gradient-progress": "^1.1.1",
     "react-dom": "18.2.0",
+    "react-progressbar": "^15.4.1",
     "react-router-dom": "^6.9.0",
     "react-three": "^0.9.7",
-    "three": "^0.150.1"
+    "three": "^0.150.1",
+    "typewriter-effect": "^2.19.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",

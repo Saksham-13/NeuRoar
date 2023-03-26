@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function TodoList(props) {
-  const [todos, setTodos] = useState(props.todos);
+function TodoList({ todo, points, handlepoints }) {
+  const [todos, setTodos] = useState(todo);
   const [newTodo, setNewTodo] = useState({ name: '', points: '' });
 
   const handleCheckboxChange = (index) => {
-    const newTodos = [...todos];
-    newTodos[index].status = !newTodos[index].status;
-    setTodos(newTodos);
-    updateBackend(newTodos);
+    const newTodoList = [...todos];
+    const todo = newTodoList[index];
+
+    if (todo.status) {
+        handlepoints(points - parseInt(todo.points));
+    } else {
+        handlepoints(points + parseInt(todo.points));
+    }
+
+    todo.status = !todo.status;
+    setTodos(newTodoList);
+    updateBackend(newTodoList);
   };
 
   const handleDelete = (index) => {
@@ -26,7 +34,7 @@ function TodoList(props) {
   };
 
   const updateBackend = (newTodos) => {
-    axios.post('https://Hashcode.sakshamalok.repl.co/change', { value: newTodos, email:"bob.johnson@example.com", var:"todo_list"})
+    axios.post('https://CoordinatedWarmBloatware.ebook1.repl.co/change', { value: newTodos, email:"bob.johnson@example.com", var:"todo_list"})
       .then(response => console.log(response))
       .catch(error => console.log(error));
   };
@@ -35,7 +43,7 @@ function TodoList(props) {
     <div className="max-w-3xl mx-auto">
       <div className="flex flex-col space-y-4">
         {todos.map((todo, index) => (
-          <div key={index} className="bg-white rounded-md shadow-md flex space-x-4 items-center p-4">
+          <div key={index} className="bg-white w-2/3 mx-auto rounded-md shadow-md flex space-x-4 items-center p-4">
             <div className={`flex-grow ${todo.status ? 'line-through text-gray-400' : ''}`}>
               <h3 className="font-bold text-lg">{todo.name}</h3>
               <p className="text-sm">{todo.points}</p>
@@ -54,7 +62,7 @@ function TodoList(props) {
             </div>
           </div>
         ))}
-        <div className="bg-white rounded-md shadow-md flex space-x-4 items-center p-4">
+        <div className="bg-white mx-auto rounded-md shadow-md w-2/3 flex space-x-4 items-center p-4">
           <div className="flex-grow">
             <input type="text"
                    className="w-full"
